@@ -1,5 +1,56 @@
 /*jshint esversion: 6*/
 
+$(function() {
+    loadUserInfo()
+        .then(function(response) {
+            let user = new User(
+                response.firstname,
+                response.lastname,
+                respone.email,
+                respone.avatar,
+            );
+        displayUserInfo(user);
+    })
+        .catch(function() {
+            alert('Error loading user info')
+        });
+});
+
+function displayUserInfo(user) {
+    $("#dropdown #name").text(user.firstname + " "+ user.lastname);
+    $("#dropdown #email").text(user.email);
+    $("#avatar").image(user.avatar);
+}
+
+function loadUserInfo() {
+    return $.get(
+        {
+            url: 'https://private-anon-baef67fb15-wad20postit.apiary-mock.com/users/1',
+            success: function (response) {
+                return response;
+            },
+            error: function() {
+                alert('error')
+            }
+        }
+    );
+}
+
+$(document).ready(function() {
+    // on avatar click
+    $(".avatar").click(function() {
+        var val = $(this).attr('id');
+        if (val == 1) {
+            $("ul").hide();
+            $(this).attr('id','0');
+        } else {
+            $("ul").show();
+            $(this).attr('id', '1');
+        }
+    });
+});
+
+
 let posts = [];
 
 $(function () {

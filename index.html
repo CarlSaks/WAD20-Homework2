@@ -2,8 +2,10 @@
 <html lang="en" dir="ltr">
 
 <head>
-  <meta http-equiv="Content-Type" content="text/html;charset=UTF-8">
+  <meta http-equiv="Content-Type" content="text/html;charset=UTF-8;text/javascript">
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <script src="res/js/script.js"></script>
+  <script src="res/js/User.js"></script>
   <link href="https://fonts.googleapis.com/css2?family=Roboto+Slab&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="res/css/style.css">
   <title>postIt! Just Post It</title>
@@ -24,7 +26,15 @@
       </div>
       <div class="avatar-container">
 
-        <img src="res/images/avatar.png" class="avatar" alt="Me">
+        <img id = "avatar" src="res/images/avatar.png" class="avatar" alt="Me">
+        <div class="dropdown">
+          <ul class="root">
+            <li id="name"></li>
+            <li id="email"></li>
+            <li><a href="browse.html" target="_blank">Browse</a></li>
+            <li><a href="login.html">Log out</a></li>
+          </ul>
+        </div>
 
       </div>
     </nav>
@@ -34,7 +44,6 @@
     <!-- dynamically loaded posts -->
   </section>
 
-  <script src="res/js/script.js"></script>
 </body>
 
 </html>
