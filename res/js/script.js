@@ -6,8 +6,8 @@ $(function() {
             let user = new User(
                 response.firstname,
                 response.lastname,
-                respone.email,
-                respone.avatar,
+                response.email,
+                response.avatar,
             );
         displayUserInfo(user);
     })
@@ -17,9 +17,9 @@ $(function() {
 });
 
 function displayUserInfo(user) {
-    $("#dropdown #name").text(user.firstname + " "+ user.lastname);
-    $("#dropdown #email").text(user.email);
-    $("#avatar").image(user.avatar);
+    $(".dropdown #name").text(user.firstname + " "+ user.lastname);
+    $(".dropdown #email").text(user.email);
+    $(".avatar").attr("src", user.avatar);
 }
 
 function loadUserInfo() {
@@ -35,6 +35,8 @@ function loadUserInfo() {
         }
     );
 }
+
+
 
 $(document).ready(function() {
     // on avatar click

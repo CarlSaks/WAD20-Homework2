@@ -131,17 +131,17 @@ ul {
 
 li {
     padding: 8px, 16px;
+    margin: 8px;
     border-bottom: 1px solid #e5e5e5;
 }
 
 li:last-child {
     border-bottom: none;
 }
-
-li:hover {
-    background-color: #e5e5e5;
-    color: white;
+li:first-child {
+    border-bottom: none;
 }
+
 
 .main-container {
     width: 50%;
