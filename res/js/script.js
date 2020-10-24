@@ -1,6 +1,10 @@
 /*jshint esversion: 6*/
 
 $(function() {
+    //retrieve and display posts
+    loadPosts()
+
+    //retrieve and display user info
     loadUserInfo()
         .then(function(response) {
             let user = new User(
@@ -12,9 +16,24 @@ $(function() {
         displayUserInfo(user);
     })
         .catch(function() {
-            alert('Error loading user info')
+            alert('Error displaying user info')
         });
+
+    // on avatar click show user info
+    $(".avatar").click(function() {
+        let val = $(this).attr('id');
+        if (val === 1) {
+            $("ul").hide();
+            $(this).attr('id','0');
+        } else {
+            $("ul").show();
+            $(this).attr('id', '1');
+        }
+    });
+
 });
+
+
 
 function displayUserInfo(user) {
     $(".dropdown #name").text(user.firstname + " "+ user.lastname);
@@ -23,58 +42,27 @@ function displayUserInfo(user) {
 }
 
 function loadUserInfo() {
-    return $.get(
-        {
-            url: 'https://private-anon-baef67fb15-wad20postit.apiary-mock.com/users/1',
-            success: function (response) {
-                return response;
-            },
-            error: function() {
-                alert('error')
-            }
-        }
-    );
+    return $.get('https://private-anon-baef67fb15-wad20postit.apiary-mock.com/users/1')
+        .catch(function () {
+            alert('Error retrieving user info')
+        });
 }
-
-
-
-$(document).ready(function() {
-    // on avatar click
-    $(".avatar").click(function() {
-        var val = $(this).attr('id');
-        if (val == 1) {
-            $("ul").hide();
-            $(this).attr('id','0');
-        } else {
-            $("ul").show();
-            $(this).attr('id', '1');
-        }
-    });
-});
-
-
-let posts = [];
-
-$(function () {
-    loadPosts();
-
-
-});
 
 function loadPosts() {
     $.get("https://private-anon-5f6b9424b5-wad20postit.apiary-mock.com/posts",
         function (response) {
             for (let post of response) {
                 CreatePost(post);
-                posts.push(post);
             }
         }
-    );
+    ).catch(function () {
+        alert('Error retrieving posts')
+    })
 }
 
 function CreatePost(content) {
-    let image = $.trim(content.media === null) === "false";
-    let text = $.trim(content.text === null) === "false";
+    let image = $.trim(content["media"] === null) === "false";
+    let text = $.trim(content["text"] === null) === "false";
 
     // post container
     let post = $('<div class="post">');
@@ -82,15 +70,15 @@ function CreatePost(content) {
         // author info container
         let postAuthorContainer = $('<div class="post-author">').append(
             $('<span class="post-author-info">').append(
-                $('<img>').attr({
-                    src: content.author.avatar
+                $('<img src="" alt="">').attr({
+                    src: content["author"].avatar
                 }),
                 $('<small>').text(
-                    content.author.firstname + " " +
-                    content.author.lastname
+                    content["author"].firstname + " " +
+                    content["author"].lastname
                 )
             ),
-            content.createTime
+            $('<small>').text(content["createTime"])
         );
         post.append(postAuthorContainer);
 
@@ -101,12 +89,12 @@ function CreatePost(content) {
         let postMediaContainer = $('<div class="post-image">');
 
         // if media type: image
-        if (content.media.type === "image") { 
+        if (content["media"].type === "image") {
 
             // create image element
             postMediaContainer.append(
-                $('<img>').attr({
-                    src: content.media.url
+                $('<img src="" alt="">').attr({
+                    src: content["media"].url
                 })
             );
         } 
@@ -117,7 +105,7 @@ function CreatePost(content) {
             postMediaContainer.append(
                 $('<video controls autoplay loop>').append(
                     $('<source>').attr({
-                        src: content.media.url
+                        src: content["media"].url
                     }),
                     "Your browser does not support the video tag."
                 )
@@ -132,7 +120,7 @@ function CreatePost(content) {
         // post title container
         let postTitleContainer = $('<div class="post-title">').append(
             $('<h3>').text(
-                content.text
+                content["text"]
             )
         );
         post.append(postTitleContainer);
@@ -141,7 +129,7 @@ function CreatePost(content) {
         // post buttons container
         let postActionContainer = $('<div class="post-actions">').append(
             $('<button type="button" name="like" class="like-button">').text(
-                content.likes
+                content["likes"]
             ).click(function() { // click event for like-button
                 $(this).toggleClass("liked");
             })
