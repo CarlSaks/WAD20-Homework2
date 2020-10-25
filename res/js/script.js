@@ -48,6 +48,29 @@ function loadUserInfo() {
         });
 }
 
+function displayProfile() {
+    //Kuidas ma saan kätte, et ta informatsiooni kuvaks
+
+    //kas peaks tegema eraldi CSS'i selle pildi jaoks, vist mitte, peaks saama eelnevaid rakendada
+     $(".avatar").attr("src", user.avatar);
+     //tavalise tekstiga kuvab õige asja
+     $(".profile-post #name").text(user.firstname + " "+ user.lastname);
+
+
+  /* leidsin netist selle
+        $('<div class="browse-container">').click(function() {
+        $(this).text(function(_, text) {
+            return text === "Follow" ? "Unfollow" : "Follow";
+        });
+        if($(this).text() === "Follow") {
+            $(this).removeClass('unfollow');
+        } else if($(this).text() === "Unfollow") {
+            $(this).addClass('unfollow');
+        }
+    }); */
+
+}
+
 function loadPosts() {
     $.get("https://private-anon-5f6b9424b5-wad20postit.apiary-mock.com/posts",
         function (response) {

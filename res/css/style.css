@@ -58,6 +58,17 @@ button:hover {
     cursor: pointer;
 }
 
+.follow-button {
+    background-color: #6C3483;
+    box-shadow: 0 0 5px rgba(38, 50, 56, 0.7);
+}
+
+.unfollow-button{
+    color: #6C3483;
+    background-color: #ffffff;
+    box-shadow: 0 0 5px rgba(38, 50, 56, 0.7);
+}
+
 header {
     position: fixed;
     width: 100%;
@@ -151,14 +162,14 @@ li:first-child {
     background-color: #ffffff;
 }
 
-.post {
+.post, .post-browse {
     width: 80%;
     margin: 15px auto;
     box-shadow: 0 0 15px rgba(38, 50, 56, 0.33);
     border-radius: 5px;
 }
 
-.post .post-author {
+.post {
     padding: 10px;
 }
 
@@ -232,3 +243,4 @@ li:first-child {
 .like-button.liked {
     background-color: #01579b;
 }
+
