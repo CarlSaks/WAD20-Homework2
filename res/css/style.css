@@ -130,7 +130,7 @@ ul {
     padding: 0;
     top: 45px;
     right: 0;
-    width: 200px;
+    width: max-content;
     background-color: white;
     font-weight: bold;
     position: absolute;
@@ -201,6 +201,7 @@ li:first-child {
 }
 
 .post .post-author .post-author-info small {
+    margin-left: 10px;
     position: absolute;
     top: 10px;
     left: 35px;

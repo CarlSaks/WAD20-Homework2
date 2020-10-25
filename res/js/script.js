@@ -1,4 +1,3 @@
-/*jshint esversion: 6*/
 
 // identifies the html page by script id
 let scriptId = $('script[src$="/script.js"]').attr('id')
@@ -75,7 +74,7 @@ function displayUserInfo(user) {
     $(".avatar").attr("src", user.avatar);
 }
 
-function loadProfiles(profile) {
+function loadProfiles() {
     return $.get('https://private-anon-88f85b3440-wad20postit.apiary-mock.com/profiles')
         .catch(function () {
             alert('Error, failed to retrieve profiles')
@@ -117,7 +116,7 @@ function CreatePost(content) {
     let post = $('<div class="post">');
 
         // author info container
-        let postAuthorContainer = $('<div class="post-author">').append(
+        post.append( $('<div class="post-author">').append(
             $('<span class="post-author-info">').append(
                 $('<img src="" alt="">').attr({
                     src: content["author"].avatar
@@ -128,8 +127,7 @@ function CreatePost(content) {
                 )
             ),
             $('<small>').text(content["createTime"])
-        );
-        post.append(postAuthorContainer);
+        ));
 
     // if media not null
     if (image) {
@@ -167,23 +165,25 @@ function CreatePost(content) {
     if (text) {
 
         // post title container
-        let postTitleContainer = $('<div class="post-title">').append(
+        post.append( $('<div class="post-title">').append(
             $('<h3>').text(
                 content["text"]
             )
-        );
-        post.append(postTitleContainer);
+        ))
+    } else {
+        post.append(
+            $('<div class="post-title" hidden>')
+        )
     }
         
         // post buttons container
-        let postActionContainer = $('<div class="post-actions">').append(
+        post.append( $('<div class="post-actions">').append(
             $('<button type="button" name="like" class="like-button">').text(
                 content["likes"]
             ).click(function() { // click event for like-button
                 $(this).toggleClass("liked");
             })
-        );
-        post.append(postActionContainer);
+        ))
 
-    $('.main-container').prepend(post);
+    $('.main-container').prepend(post)
 }
