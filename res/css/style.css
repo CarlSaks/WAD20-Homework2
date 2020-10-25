@@ -143,7 +143,7 @@ li:first-child {
 }
 
 
-.main-container {
+.main-container, .browse-container {
     width: 50%;
     min-height: 100%;
     margin: auto auto;
