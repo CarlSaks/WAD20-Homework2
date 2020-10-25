@@ -128,8 +128,8 @@ ul {
     list-style-type: none;
     margin: 0;
     padding: 0;
-    top:45 px;
-    right: 0px;
+    top: 45px;
+    right: 0;
     width: 200px;
     background-color: white;
     font-weight: bold;
@@ -163,7 +163,10 @@ li:first-child {
 }
 .browse-container{
     display: flex;
-    flex-direction: column;
+    flex-direction: row;
+    justify-content: space-evenly;
+    align-content: flex-start;
+    flex-wrap: wrap;
 }
 .post, .post-browse {
     width: 80%;
@@ -250,13 +253,18 @@ li:first-child {
 .profile {
     display: flex;
     flex-direction: column;
+    justify-content: space-evenly;
+    align-items: center;
     box-sizing: border-box;
-    width: 50%;
-    /*height: 200px;*/
+    min-width: 45%;
+    max-width: 45%;
+    max-height: 300px;
+    min-height: 300px;
     border: solid #D5D8DC 1px;
     padding: 5px;
     border-radius: 8px;
-    /*text-align: center;*/
+    text-align: center;
+    margin-top: 20px;
 }
 
 .small-avatar {
@@ -266,11 +274,9 @@ li:first-child {
 .small-avatar img {
     width: inherit;
     height: inherit;
-    object-fit: contain;
-    /*border-radius: 50%;*/
-    /* overflow: hidden; */
-    /*margin-left: auto;*/
-    /*margin-right: auto;*/
+    object-fit: cover;
+    object-position: top;
+    border-radius: 50%;
 }
 
 
