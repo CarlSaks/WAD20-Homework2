@@ -49,7 +49,7 @@ $(function() {
     // on avatar click show user info
     $(".avatar").click(function () {
         let val = $(this).attr('id');
-        if (val === 1) {
+        if (val === '1') {
             $("ul").hide();
             $(this).attr('id', '0');
         } else {
@@ -84,19 +84,19 @@ function loadProfiles(profile) {
 
 function displayProfile(profile) {
     let profileContainer = $('<div class="profile">').append(
-        $('<img class="small-avatar" src="" alt="">').attr('src', profile['avatar']),
+        $('<div class="small-avatar">').append(
+            $('<img src="" alt="">').attr('src', profile['avatar'])
+        ),
         $('<h2>').text(profile['firstname'] + ' ' + profile['lastname']),
         $('<button class="follow-button">').text('Follow').click(function() {
             let button = $(this)
+
             if (button.text() === "Follow") {
                 button.toggleClass("unfollow-button").text("Unfollow")
             } else {
                 button.toggleClass("unfollow-button").text("Follow")
             }
         })
-
-
-
     )
 
     $('.browse-container').append(profileContainer)
