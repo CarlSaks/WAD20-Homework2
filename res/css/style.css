@@ -266,8 +266,9 @@ li:first-child {
 .small-avatar img {
     width: inherit;
     height: inherit;
-    object-fit: contain;
-    /*border-radius: 50%;*/
+    object-fit: cover;
+    object-position:top;
+    border-radius: 50%;
     /* overflow: hidden; */
     /*margin-left: auto;*/
     /*margin-right: auto;*/
