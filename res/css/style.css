@@ -161,6 +161,11 @@ li:first-child {
     padding: 90px 15px 15px 15px;
     background-color: #ffffff;
 }
+.browse-container{
+    display: flex;
+    justify-content: center;
+}
+
 
 .post, .post-browse {
     width: 80%;
@@ -243,4 +248,26 @@ li:first-child {
 .like-button.liked {
     background-color: #01579b;
 }
+
+.profile {
+    flex-direction: column;
+    box-sizing: content-box;
+    width: 100%;
+    height: 200 px;
+    border: solid #D5D8DC 1px;
+    padding: 5px;
+    border-radius: 8px;
+    text-align: center;
+}
+
+.small-avatar {
+    display:flex;
+    width: 100px;
+    height: 100px;
+    border-radius: 50%;
+    overflow: hidden;
+    margin-left: auto;
+    margin-right: auto;
+}
+
 

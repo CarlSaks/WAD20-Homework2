@@ -84,7 +84,7 @@ function loadProfiles(profile) {
 
 function displayProfile(profile) {
     let profileContainer = $('<div class="profile">').append(
-        $('<img src="" alt="">').attr('src', profile['avatar']),
+        $('<img class="small-avatar" src="" alt="">').attr('src', profile['avatar']),
         $('<h2>').text(profile['firstname'] + ' ' + profile['lastname']),
         $('<button class="follow-button">').text('Follow').click(function() {
             let button = $(this)
