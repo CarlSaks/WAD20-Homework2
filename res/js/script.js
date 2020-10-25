@@ -86,7 +86,17 @@ function displayProfile(profile) {
     let profileContainer = $('<div class="profile">').append(
         $('<img src="" alt="">').attr('src', profile['avatar']),
         $('<h2>').text(profile['firstname'] + ' ' + profile['lastname']),
-        $('<button>').text('Follow')
+        $('<button class="follow-button">').text('Follow').click(function() {
+            let button = $(this)
+            if (button.text() === "Follow") {
+                button.toggleClass("unfollow-button").text("Unfollow")
+            } else {
+                button.toggleClass("unfollow-button").text("Follow")
+            }
+        })
+
+
+
     )
 
     $('.browse-container').append(profileContainer)
