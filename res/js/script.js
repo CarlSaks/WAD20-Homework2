@@ -1,30 +1,57 @@
 /*jshint esversion: 6*/
 
+// identifies the html page by script id
+let scriptId = $('script[src$="/script.js"]').attr('id')
+
 $(function() {
-    //retrieve and display posts
-    loadPosts()
+
+    if (scriptId === 'index') {
+        console.log('index')
+
+        //retrieve and display posts
+        loadPosts().then(function (response) {
+            for (let post of response) {
+                CreatePost(post);
+            }
+        }).catch(function () {
+            alert('Error, failed to display posts')
+        })
+
+    } else if (scriptId === 'browse') {
+        console.log('browse')
+
+        //retrieve and display all profiles
+        loadProfiles()
+            .then(function (response) {
+                for (let profile of response) {
+                    displayProfile(profile)
+                }
+            }).catch(function () {
+            alert('Error, failed to display profiles')
+        })
+    }
 
     //retrieve and display user info
     loadUserInfo()
-        .then(function(response) {
+        .then(function (response) {
             let user = new User(
                 response.firstname,
                 response.lastname,
                 response.email,
                 response.avatar,
             );
-        displayUserInfo(user);
-    })
-        .catch(function() {
-            alert('Error displaying user info')
+            displayUserInfo(user);
+        })
+        .catch(function () {
+            alert('Error, failed to display user info')
         });
 
     // on avatar click show user info
-    $(".avatar").click(function() {
+    $(".avatar").click(function () {
         let val = $(this).attr('id');
         if (val === 1) {
             $("ul").hide();
-            $(this).attr('id','0');
+            $(this).attr('id', '0');
         } else {
             $("ul").show();
             $(this).attr('id', '1');
@@ -35,51 +62,40 @@ $(function() {
 
 
 
+function loadUserInfo() {
+    return $.get('https://private-anon-baef67fb15-wad20postit.apiary-mock.com/users/1')
+        .catch(function () {
+            alert('Error, failed to retrieve user info')
+        });
+}
+
 function displayUserInfo(user) {
     $(".dropdown #name").text(user.firstname + " "+ user.lastname);
     $(".dropdown #email").text(user.email);
     $(".avatar").attr("src", user.avatar);
 }
 
-function loadUserInfo() {
-    return $.get('https://private-anon-baef67fb15-wad20postit.apiary-mock.com/users/1')
+function loadProfiles(profile) {
+    return $.get('https://private-anon-88f85b3440-wad20postit.apiary-mock.com/profiles')
         .catch(function () {
-            alert('Error retrieving user info')
+            alert('Error, failed to retrieve profiles')
         });
 }
 
-function displayProfile() {
-    //Kuidas ma saan kätte, et ta informatsiooni kuvaks
+function displayProfile(profile) {
+    let profileContainer = $('<div class="profile">').append(
+        $('<img src="" alt="">').attr('src', profile['avatar']),
+        $('<h2>').text(profile['firstname'] + ' ' + profile['lastname']),
+        $('<button>').text('Follow')
+    )
 
-    //kas peaks tegema eraldi CSS'i selle pildi jaoks, vist mitte, peaks saama eelnevaid rakendada
-     $(".avatar").attr("src", user.avatar);
-     //tavalise tekstiga kuvab õige asja
-     $(".profile-post #name").text(user.firstname + " "+ user.lastname);
-
-
-  /* leidsin netist selle
-        $('<div class="browse-container">').click(function() {
-        $(this).text(function(_, text) {
-            return text === "Follow" ? "Unfollow" : "Follow";
-        });
-        if($(this).text() === "Follow") {
-            $(this).removeClass('unfollow');
-        } else if($(this).text() === "Unfollow") {
-            $(this).addClass('unfollow');
-        }
-    }); */
-
+    $('.browse-container').append(profileContainer)
 }
 
 function loadPosts() {
-    $.get("https://private-anon-5f6b9424b5-wad20postit.apiary-mock.com/posts",
-        function (response) {
-            for (let post of response) {
-                CreatePost(post);
-            }
-        }
-    ).catch(function () {
-        alert('Error retrieving posts')
+    return $.get("https://private-anon-5f6b9424b5-wad20postit.apiary-mock.com/posts")
+        .catch(function () {
+            alert('Error, failed to retrieve posts')
     })
 }
 
