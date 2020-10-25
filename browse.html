@@ -1,7 +1,45 @@
 <!DOCTYPE html>
 <html lang="en" dir="ltr">
 
-<head>
+<head> <meta http-equiv="Content-Type" content="text/html;charset=UTF-8;text/javascript">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto+Slab&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="res/css/style.css">
+    <title>postIt! Just Post It</title>
+</head>
+
+<body>
+<header>
+    <nav>
+        <div class="logo-container">
+
+            <img src="res/images/logo.png" alt="postIt">
+
+        </div>
+        <div class="search-container">
+
+            <input type="text" name="search"><button type="button">Search</button>
+
+        </div>
+        <div class="avatar-container">
+
+            <img src="res/images/avatar.png" class="avatar" alt="Me">
+            <div class="dropdown">
+                <ul class="root">
+                    <li id="name" ></li>
+                    <li id="email"></li>
+                    <li><a href="browse.html" target="_blank">Browse</a></li>
+                    <li><a href="login.html">Log out</a></li>
+                </ul>
+            </div>
+
+        </div>
+    </nav>
+</header>
+
+<section class="main-container">
+    <!-- dynamically loaded posts -->
+</section>
 </head>
 
 <body>
